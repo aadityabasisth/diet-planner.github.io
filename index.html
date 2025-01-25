@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      transition: background-color 0.3s, color 0.3s;
+    }
+    html.light {
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    html.dark {
+      background-color: #111827;
+      color: #f9fafb;
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+  <div class="container mx-auto px-4 py-6">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <h1 class="text-4xl font-bold">🍴 Meal Planner</h1>
+      <button id="toggleTheme" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-md shadow hover:bg-gray-300 dark:hover:bg-gray-600">
+        Toggle Theme
+      </button>
+    </header>
+
+    <!-- Form -->
+    <form id="mealForm" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+      <label for="ingredients" class="block text-lg mb-2 font-medium">Enter Ingredients (comma-separated):</label>
+      <input
+        type="text"
+        id="ingredients"
+        name="ingredients"
+        placeholder="e.g., chicken, tomato, rice"
+        class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 mb-4"
+      />
+      <button
+        type="submit"
+        class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition duration-200"
+      >
+        Find Recipes
+      </button>
+    </form>
+
+    <!-- Results Section -->
+    <div id="results" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
