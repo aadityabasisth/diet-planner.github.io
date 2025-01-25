@@ -29,3 +29,5 @@ meal-planner-app/
 ├── index.html        # Main HTML file
 ├── script.js         # JavaScript functionality
 ├── styles.css        # Tailwind CSS integration
+
+The website is live at : https://aadityabasisth.github.io/diet-planner.github.io/
