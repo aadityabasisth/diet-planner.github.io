@@ -1,5 +1,39 @@
 const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
 
+// Theme persistence
+const themeToggleButton = document.getElementById("toggleTheme");
+const resultsDiv = document.getElementById("results");
+const themePreferenceKey = "mealPlannerTheme";
+
+// Apply persisted theme on load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem(themePreferenceKey) || "light";
+  document.documentElement.className = savedTheme;
+  updateToggleButton(savedTheme);
+});
+
+// Update toggle button based on theme
+function updateToggleButton(theme) {
+  if (theme === "light") {
+    themeToggleButton.textContent = "🌙"; // Moon icon for dark mode
+    themeToggleButton.classList.replace("bg-yellow-500", "bg-blue-500");
+  } else {
+    themeToggleButton.textContent = "☀️"; // Sun icon for light mode
+    themeToggleButton.classList.replace("bg-blue-500", "bg-yellow-500");
+  }
+}
+
+// Toggle theme
+themeToggleButton.addEventListener("click", () => {
+  const currentTheme = document.documentElement.className;
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+
+  document.documentElement.className = newTheme;
+  localStorage.setItem(themePreferenceKey, newTheme); // Save theme
+  updateToggleButton(newTheme);
+});
+
+// Handle meal search
 document.getElementById("mealForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -13,7 +47,6 @@ document.getElementById("mealForm").addEventListener("submit", async function (e
     return;
   }
 
-  const resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = `<p class="text-center col-span-full">🔍 Searching for recipes...</p>`;
 
   try {
@@ -54,10 +87,4 @@ document.getElementById("mealForm").addEventListener("submit", async function (e
   } catch (error) {
     resultsDiv.innerHTML = `<p class="text-center text-red-500 col-span-full">Error: ${error.message}</p>`;
   }
-});
-
-document.getElementById("toggleTheme").addEventListener("click", () => {
-  const html = document.documentElement;
-  html.classList.toggle("light");
-  html.classList.toggle("dark");
 });
